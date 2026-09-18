@@ -28,7 +28,10 @@ export function SiteHeader() {
           |
         </span>
         <Breadcrumb examples={examples} />
-        <nav aria-label="Site" className="ml-auto flex items-center gap-4 text-sm">
+        <nav
+          aria-label="Site"
+          className="ml-auto flex items-center gap-4 text-sm"
+        >
           <Link href="/examples" className="hover:underline">
             Examples
           </Link>

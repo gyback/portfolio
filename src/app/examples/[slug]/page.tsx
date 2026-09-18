@@ -17,11 +17,7 @@ export async function generateMetadata({ params }: { params: Params }) {
   return examplePageMetadata({ slug, page: "index" });
 }
 
-export default async function ExampleIndexPage({
-  params,
-}: {
-  params: Params;
-}) {
+export default async function ExampleIndexPage({ params }: { params: Params }) {
   const { slug } = await params;
   return <ExamplePageView slug={slug} page="index" />;
 }

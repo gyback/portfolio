@@ -93,10 +93,10 @@ and prev/next links.
 
 ## Phase 4: Catalog and cross-navigation
 
-- [ ] Catalog page at `/examples` with cards (a plain list exists since Phase 3) showing title, summary, kind, and stack tags
-- [ ] Filters for kind and stack, state kept in URL query params, filtering client-side
-- [ ] Landing page at `/` with intro and featured examples
-- [ ] Related examples block on each example index page, from `related` in meta, falling back to shared stack tags
+- [x] Catalog page at `/examples` with cards showing title, summary, kind, and stack tags
+- [x] Filters for kind and stack, state kept in URL query params, filtering client-side
+- [x] Landing page at `/` with intro and featured examples
+- [x] Related examples block on each example index page, from `related` in meta, falling back to shared stack tags
 - [x] Breadcrumb in header: Examples / example title / page title
 
 ## Phase 5: External source examples
@@ -127,3 +127,4 @@ Record dated notes when a phase completes or a decision changes.
 - 2026-09-18: Phase 2 complete. Content module, schema, outline plugin, and placeholder example in place. Page refs use `slug` (file is `<slug>.mdx`) instead of `file`. The home page temporarily lists all examples so the build exercises validation until Phase 4 replaces it.
 - 2026-09-18: Phase 3 complete. Routes, header with breadcrumb, three-column example layout, page nav with mobile drawer, outline, prev/next, per-page metadata, and typography styling in place. Verified in the browser at 1440px and 800px. The outline uses scroll position instead of IntersectionObserver: the observer approach never updated in testing, and a short final section can never enter the observation band, so the last entry is now forced when scrolled to the bottom. Site name lives in `src/site.ts`. `/examples` is a plain list until Phase 4.
 - 2026-09-18: Outline changed from single active heading to highlighting all sections currently in view, per review of the Phase 3 milestone.
+- 2026-09-18: Phase 4 complete. Catalog with URL-backed kind and stack filters, landing page with featured examples, related examples block on example index pages. Added a second placeholder example (`placeholder-api`) so filters and related links can be exercised. Both placeholders are to be deleted once real examples exist.
