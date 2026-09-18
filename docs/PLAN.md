@@ -81,23 +81,23 @@ Leaves the repo as a plain Next 15 + Tailwind 4 app that builds without a databa
 Milestone: one placeholder example renders with working left nav, right outline,
 and prev/next links.
 
-- [ ] Add routes `/examples/[slug]` and `/examples/[slug]/[page]` with `generateStaticParams` and `notFound()`
-- [ ] Root layout: global header with site name, catalog link, and a breadcrumb slot
-- [ ] Example layout: three-column grid `[240px_minmax(0,1fr)_220px]`, sticky asides with own scroll
-- [ ] Left nav: page list for the current example, active page marked with `aria-current`
-- [ ] Page component: renders compiled MDX, passes outline to the right column
-- [ ] Outline component (client): single IntersectionObserver, rootMargin `-80px 0px -70% 0px`, active heading marked with `aria-current`
-- [ ] Headings get `scroll-margin-top` matching the header height
-- [ ] Prev/next links at the bottom of each page from the ordered page list
-- [ ] Responsive: outline hidden below `xl`, left nav becomes a drawer below `lg`, centre column has a max reading width
+- [x] Add routes `/examples/[slug]` and `/examples/[slug]/[page]` with `generateStaticParams` and `notFound()`
+- [x] Root layout: global header with site name, catalog link, and a breadcrumb slot
+- [x] Example layout: three-column grid `[240px_minmax(0,1fr)_220px]`, sticky asides with own scroll
+- [x] Left nav: page list for the current example, active page marked with `aria-current`
+- [x] Page component: renders compiled MDX, passes outline to the right column
+- [x] Outline component (client): scroll-position based. Every section with content on screen is highlighted, where a section runs from its heading to the next heading. A visible h3 also lights its parent h2. Marked with `aria-current`.
+- [x] Headings get `scroll-margin-top` matching the header height
+- [x] Prev/next links at the bottom of each page from the ordered page list
+- [x] Responsive: outline hidden below `xl`, left nav becomes a drawer below `lg`, centre column has a max reading width
 
 ## Phase 4: Catalog and cross-navigation
 
-- [ ] Catalog page at `/examples` with cards showing title, summary, kind, and stack tags
+- [ ] Catalog page at `/examples` with cards (a plain list exists since Phase 3) showing title, summary, kind, and stack tags
 - [ ] Filters for kind and stack, state kept in URL query params, filtering client-side
 - [ ] Landing page at `/` with intro and featured examples
 - [ ] Related examples block on each example index page, from `related` in meta, falling back to shared stack tags
-- [ ] Breadcrumb in header: Examples / example title / page title
+- [x] Breadcrumb in header: Examples / example title / page title
 
 ## Phase 5: External source examples
 
@@ -109,8 +109,10 @@ For examples whose code lives in another repo (.NET, deployment configs).
 
 ## Phase 6: Polish and deploy
 
-- [ ] Prose typography via `@tailwindcss/typography`, code block styling, dark mode from system preference
-- [ ] Per-page metadata from frontmatter, Open Graph image per example
+- [x] Prose typography via `@tailwindcss/typography` and code block styling (done in Phase 3)
+- [ ] Dark mode from system preference
+- [x] Per-page metadata from frontmatter (done in Phase 3)
+- [ ] Open Graph image per example
 - [ ] Confirm fully static output and deploy
 - [ ] CI: lint, typecheck, build
 - [ ] Link check across built output so broken internal links fail the build
@@ -123,3 +125,5 @@ Record dated notes when a phase completes or a decision changes.
 - 2026-09-18: Phase 1 complete. Prisma, NextAuth, tRPC, react-query, and env validation removed. MDX tooling added. Build and checks pass with no `.env`.
 - 2026-09-18: Upgraded to Next 16, React 19.3, and `eslint-config-next` 16. Removed `@eslint/eslintrc`.
 - 2026-09-18: Phase 2 complete. Content module, schema, outline plugin, and placeholder example in place. Page refs use `slug` (file is `<slug>.mdx`) instead of `file`. The home page temporarily lists all examples so the build exercises validation until Phase 4 replaces it.
+- 2026-09-18: Phase 3 complete. Routes, header with breadcrumb, three-column example layout, page nav with mobile drawer, outline, prev/next, per-page metadata, and typography styling in place. Verified in the browser at 1440px and 800px. The outline uses scroll position instead of IntersectionObserver: the observer approach never updated in testing, and a short final section can never enter the observation band, so the last entry is now forced when scrolled to the bottom. Site name lives in `src/site.ts`. `/examples` is a plain list until Phase 4.
+- 2026-09-18: Outline changed from single active heading to highlighting all sections currently in view, per review of the Phase 3 milestone.
