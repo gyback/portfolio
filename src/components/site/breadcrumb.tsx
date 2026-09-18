@@ -31,7 +31,7 @@ export function Breadcrumb({ examples }: { examples: BreadcrumbMap }) {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="min-w-0 text-sm text-gray-500">
+    <nav aria-label="Breadcrumb" className="text-muted min-w-0 text-sm">
       <ol className="flex items-center gap-2 overflow-hidden whitespace-nowrap">
         {crumbs.map((crumb, i) => {
           const last = i === crumbs.length - 1;
@@ -39,14 +39,11 @@ export function Breadcrumb({ examples }: { examples: BreadcrumbMap }) {
             <li key={crumb.href} className="flex items-center gap-2">
               {i > 0 && <span aria-hidden="true">/</span>}
               {last ? (
-                <span aria-current="page" className="truncate text-gray-900">
+                <span aria-current="page" className="text-fg truncate">
                   {crumb.label}
                 </span>
               ) : (
-                <Link
-                  href={crumb.href}
-                  className="truncate hover:text-gray-900"
-                >
+                <Link href={crumb.href} className="hover:text-fg truncate">
                   {crumb.label}
                 </Link>
               )}

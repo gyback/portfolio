@@ -17,7 +17,7 @@ export function PrevNext({
   return (
     <nav
       aria-label="Previous and next page"
-      className="mt-12 flex justify-between gap-4 border-t border-gray-200 pt-6 text-sm"
+      className="border-line mt-12 flex justify-between gap-4 border-t pt-6 text-sm"
     >
       {prev ? (
         <Link
@@ -25,7 +25,7 @@ export function PrevNext({
           rel="prev"
           className="group flex flex-col"
         >
-          <span className="text-gray-500">Previous</span>
+          <span className="text-muted">Previous</span>
           <span className="font-medium group-hover:underline">
             ← {prev.title}
           </span>
@@ -39,7 +39,7 @@ export function PrevNext({
           rel="next"
           className="group flex flex-col text-right"
         >
-          <span className="text-gray-500">Next</span>
+          <span className="text-muted">Next</span>
           <span className="font-medium group-hover:underline">
             {next.title} →
           </span>

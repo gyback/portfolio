@@ -44,7 +44,7 @@ export async function ExamplePageView({ slug, page }: Props) {
   return (
     <div className="contents">
       <article className="min-w-0 py-8 lg:py-10">
-        <div className="prose prose-neutral max-w-3xl">
+        <div className="prose prose-neutral dark:prose-invert max-w-3xl">
           <Content components={components} />
         </div>
         <div className="max-w-3xl">

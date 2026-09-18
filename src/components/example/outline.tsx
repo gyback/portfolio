@@ -77,10 +77,10 @@ export function Outline({ entries }: { entries: OutlineEntry[] }) {
 
   return (
     <nav aria-label="On this page">
-      <p className="mb-3 text-xs font-semibold tracking-wide text-gray-500 uppercase">
+      <p className="text-muted mb-3 text-xs font-semibold tracking-wide uppercase">
         On this page
       </p>
-      <ul className="space-y-1 border-l border-gray-200 text-sm">
+      <ul className="border-line space-y-1 border-l text-sm">
         {entries.map((entry) => {
           const active = activeIds.has(entry.id);
           return (
@@ -92,8 +92,8 @@ export function Outline({ entries }: { entries: OutlineEntry[] }) {
                   "-ml-px block border-l py-1 pr-2 transition-colors",
                   entry.depth === 3 ? "pl-6" : "pl-3",
                   active
-                    ? "border-gray-900 font-medium text-gray-900"
-                    : "border-transparent text-gray-500 hover:text-gray-900",
+                    ? "border-fg text-fg font-medium"
+                    : "text-muted hover:text-fg border-transparent",
                 ].join(" ")}
               >
                 {entry.text}

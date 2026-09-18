@@ -3,6 +3,8 @@ import createMDX from "@next/mdx";
 
 /** @type {import("next").NextConfig} */
 const config = {
+  // Fully static site. `next build` writes plain HTML and assets to ./out.
+  output: "export",
   pageExtensions: ["ts", "tsx", "md", "mdx"],
 };
 
