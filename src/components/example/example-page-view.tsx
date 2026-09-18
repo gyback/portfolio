@@ -6,6 +6,7 @@ import { getPage, getRelatedExamples } from "~/content";
 import { Outline } from "./outline";
 import { PrevNext } from "./prev-next";
 import { RelatedExamples } from "./related-examples";
+import { SourceFile, type SourceFileProps } from "./source-file";
 
 type Props = { slug: string; page: string };
 
@@ -33,11 +34,18 @@ export async function ExamplePageView({ slug, page }: Props) {
   const { Content, outline, example, prev, next } = data;
   const related = page === "index" ? getRelatedExamples(example) : [];
 
+  // Components available inside MDX, bound to the current example.
+  const components = {
+    SourceFile: (props: SourceFileProps) => (
+      <SourceFile example={example} {...props} />
+    ),
+  };
+
   return (
     <div className="contents">
       <article className="min-w-0 py-8 lg:py-10">
         <div className="prose prose-neutral max-w-3xl">
-          <Content />
+          <Content components={components} />
         </div>
         <div className="max-w-3xl">
           <PrevNext exampleSlug={example.slug} prev={prev} next={next} />

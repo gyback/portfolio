@@ -45,17 +45,17 @@ content/examples/<slug>/
 
 `meta.json`, validated with zod at build time:
 
-| Field      | Type                                         | Notes                                                     |
-| ---------- | -------------------------------------------- | --------------------------------------------------------- |
-| `title`    | string                                       |                                                           |
-| `summary`  | string                                       | Shown on catalog cards                                    |
-| `date`     | ISO date string                              |                                                           |
-| `kind`     | frontend, backend, fullstack, infrastructure |                                                           |
-| `stack`    | string[]                                     | Free-form tags                                            |
-| `pages`    | `{ slug, title }[]`                          | Ordered. First slug must be `index`. File is `<slug>.mdx` |
-| `related`  | string[] (optional)                          | Example slugs                                             |
-| `repo`     | URL (optional)                               | External source repository                                |
-| `featured` | boolean (optional)                           | Shown on the landing page                                 |
+| Field      | Type                                         | Notes                                                           |
+| ---------- | -------------------------------------------- | --------------------------------------------------------------- |
+| `title`    | string                                       |                                                                 |
+| `summary`  | string                                       | Shown on catalog cards                                          |
+| `date`     | ISO date string                              |                                                                 |
+| `kind`     | frontend, backend, fullstack, infrastructure |                                                                 |
+| `stack`    | string[]                                     | Free-form tags                                                  |
+| `pages`    | `{ slug, title }[]`                          | Ordered. First slug must be `index`. File is `<slug>.mdx`       |
+| `related`  | string[] (optional)                          | Example slugs                                                   |
+| `source`   | `{ repo, ref, files }` (optional)            | GitHub repo URL, full commit SHA, file paths for `<SourceFile>` |
+| `featured` | boolean (optional)                           | Shown on the landing page                                       |
 
 ## Phase 1: Strip the scaffold and set the foundation
 
@@ -103,9 +103,9 @@ and prev/next links.
 
 For examples whose code lives in another repo (.NET, deployment configs).
 
-- [ ] Build-time script that fetches named files from external repos at a pinned commit into a cache folder
-- [ ] `<SourceFile>` MDX component: renders a cached file with language, optional line range, and a link to the file in the source repo
-- [ ] Document the pinning convention in the README
+- [x] Build-time script that fetches named files from external repos at a pinned commit into a cache folder
+- [x] `<SourceFile>` MDX component: renders a cached file with language, optional line range, and a link to the file in the source repo
+- [x] Document the pinning convention in the README
 
 ## Phase 6: Polish and deploy
 
@@ -128,3 +128,4 @@ Record dated notes when a phase completes or a decision changes.
 - 2026-09-18: Phase 3 complete. Routes, header with breadcrumb, three-column example layout, page nav with mobile drawer, outline, prev/next, per-page metadata, and typography styling in place. Verified in the browser at 1440px and 800px. The outline uses scroll position instead of IntersectionObserver: the observer approach never updated in testing, and a short final section can never enter the observation band, so the last entry is now forced when scrolled to the bottom. Site name lives in `src/site.ts`. `/examples` is a plain list until Phase 4.
 - 2026-09-18: Outline changed from single active heading to highlighting all sections currently in view, per review of the Phase 3 milestone.
 - 2026-09-18: Phase 4 complete. Catalog with URL-backed kind and stack filters, landing page with featured examples, related examples block on example index pages. Added a second placeholder example (`placeholder-api`) so filters and related links can be exercised. Both placeholders are to be deleted once real examples exist.
+- 2026-09-19: Phase 5 complete. `source` in meta.json declares a GitHub repo, a full commit SHA, and file paths. `scripts/fetch-sources.mjs` downloads them into `content/.sources/<slug>/<ref>/` (committed, pruned on ref change) and runs before `dev` and `build`. `<SourceFile>` renders a cached file with shiki, line numbers, an optional line range, and a link to the file at the pinned commit. Replaced the `repo` meta field with `source`. The content loader no longer caches parsed meta in development, so meta.json edits show without a restart. Placeholder API pins two files from `dotnet/samples` as a working demo.

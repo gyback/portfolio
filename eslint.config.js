@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: [".next", "out", "node_modules"],
+    ignores: [".next", "out", "node_modules", "content/.sources"],
   },
   ...nextCoreWebVitals,
   ...nextTypescript,
