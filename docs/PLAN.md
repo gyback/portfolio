@@ -57,12 +57,12 @@ content/examples/<slug>/
 
 Leaves the repo as a plain Next 15 + Tailwind 4 app that builds without a database.
 
-- [ ] Remove Prisma, NextAuth, tRPC, react-query, superjson, and `start-database.sh`
-- [ ] Delete `src/server`, `src/trpc`, `src/app/api`, `generated`, `prisma`, and `src/app/_components/post.tsx`
-- [ ] Remove or trim `src/env.js` and its import in `next.config.js`
-- [ ] Add `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `remark-gfm`, `rehype-slug`, `rehype-pretty-code`, `shiki`, `gray-matter`
-- [ ] Reset `src/app/page.tsx` to a placeholder
-- [ ] Verify `npm run build` and `npm run check` pass with no `.env` required
+- [x] Remove Prisma, NextAuth, tRPC, react-query, superjson, and `start-database.sh`
+- [x] Delete `src/server`, `src/trpc`, `src/app/api`, `generated`, `prisma`, and `src/app/_components/post.tsx`
+- [x] Remove or trim `src/env.js` and its import in `next.config.js`
+- [x] Add `@next/mdx`, `@mdx-js/loader`, `@mdx-js/react`, `remark-gfm`, `rehype-slug`, `rehype-pretty-code`, `shiki`, `gray-matter`
+- [x] Reset `src/app/page.tsx` to a placeholder
+- [x] Verify `npm run build` and `npm run check` pass with no `.env` required
 
 ## Phase 2: Content model
 
@@ -116,3 +116,4 @@ For examples whose code lives in another repo (.NET, deployment configs).
 Record dated notes when a phase completes or a decision changes.
 
 - 2026-09-18: Plan written. Repo is an untouched create-t3-app scaffold.
+- 2026-09-18: Phase 1 complete. Prisma, NextAuth, tRPC, react-query, and env validation removed. MDX tooling added. Build and checks pass with no `.env`.
