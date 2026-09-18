@@ -8,7 +8,7 @@ export function RelatedExamples({ examples }: { examples: Example[] }) {
   return (
     <section
       aria-labelledby="related-heading"
-      className="mt-12 border-t border-gray-200 pt-8"
+      className="border-line mt-12 border-t pt-8"
     >
       <h2 id="related-heading" className="text-lg font-semibold">
         Related examples

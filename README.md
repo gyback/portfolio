@@ -19,6 +19,22 @@ npm run check   # lint + typecheck
 npm run build
 ```
 
+## Deploying
+
+`npm run build` produces a fully static site in `out/`. Every route is plain
+HTML plus assets, so it can be served by any static host or web server.
+
+- Set `NEXT_PUBLIC_SITE_URL` to the public origin at build time so Open Graph
+  URLs are absolute. Locally it falls back to `http://localhost:3000`.
+- Routes are emitted as `path.html` (for example `out/examples.html`). Hosts
+  such as Vercel, Netlify, and Cloudflare Pages serve these for `/examples`
+  automatically. For nginx use `try_files $uri $uri.html $uri/ =404;`.
+- `npm run preview` builds and serves `out/` locally.
+
+The build fails if any internal link or fragment in the output is broken
+(`scripts/check-links.mjs`). CI runs lint, typecheck, format check, and the
+build on every push and pull request, and uploads `out/` as an artifact.
+
 ## Adding an example
 
 Create `content/examples/<slug>/` with a `meta.json` and one `.mdx` file per

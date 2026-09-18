@@ -13,11 +13,11 @@ export default function Home() {
     <main className="mx-auto max-w-screen-2xl px-4 py-16">
       <section className="max-w-2xl">
         <h1 className="text-4xl font-bold tracking-tight">{site.name}</h1>
-        <p className="mt-4 text-lg text-gray-600">{site.description}</p>
+        <p className="text-muted mt-4 text-lg">{site.description}</p>
         <p className="mt-6">
           <Link
             href="/examples"
-            className="inline-block rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700"
+            className="bg-fg text-bg inline-block rounded-md px-4 py-2 text-sm font-medium hover:opacity-90"
           >
             Browse all examples
           </Link>

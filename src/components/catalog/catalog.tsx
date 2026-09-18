@@ -87,7 +87,7 @@ export function Catalog({
         </FilterGroup>
       </div>
 
-      <p className="mt-6 text-sm text-gray-500" aria-live="polite">
+      <p className="text-muted mt-6 text-sm" aria-live="polite">
         {filtered.length === examples.length
           ? `${examples.length} examples`
           : `${filtered.length} of ${examples.length} examples`}
@@ -102,7 +102,7 @@ export function Catalog({
       </p>
 
       {filtered.length === 0 ? (
-        <p className="mt-8 text-gray-600">
+        <p className="text-muted mt-8">
           No examples match this combination of filters.
         </p>
       ) : (
@@ -127,7 +127,7 @@ function FilterGroup({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="w-12 text-xs font-semibold tracking-wide text-gray-500 uppercase">
+      <span className="text-muted w-12 text-xs font-semibold tracking-wide uppercase">
         {label}
       </span>
       {children}
@@ -156,8 +156,8 @@ function Chip({
         "rounded-full border px-3 py-1 text-sm transition-colors",
         mono ? "font-mono text-xs" : "",
         active
-          ? "border-gray-900 bg-gray-900 text-white"
-          : "border-gray-300 text-gray-700 hover:border-gray-500",
+          ? "border-fg bg-fg text-bg"
+          : "border-line text-fg hover:border-muted",
       ].join(" ")}
     >
       {children}

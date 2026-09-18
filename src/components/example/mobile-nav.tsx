@@ -14,7 +14,7 @@ export function MobileNav({ children }: { children: React.ReactNode }) {
   const open = openFor === pathname;
 
   return (
-    <div className="border-b border-gray-200 py-3 lg:hidden">
+    <div className="border-line border-b py-3 lg:hidden">
       <button
         type="button"
         aria-expanded={open}

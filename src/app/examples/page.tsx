@@ -26,7 +26,7 @@ export default function ExamplesPage() {
   return (
     <main className="mx-auto max-w-screen-2xl px-4 py-12">
       <h1 className="text-3xl font-bold tracking-tight">Examples</h1>
-      <p className="mt-2 max-w-2xl text-gray-600">
+      <p className="text-muted mt-2 max-w-2xl">
         Filter by what kind of work it is, or by the stack it uses.
       </p>
       <div className="mt-8">
