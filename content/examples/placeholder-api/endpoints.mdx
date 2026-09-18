@@ -1,5 +1,5 @@
 ---
-description: The imaginary endpoints of the placeholder API.
+description: The imaginary endpoints of the placeholder API, plus real source pulled from a pinned commit.
 ---
 
 # Endpoints
@@ -16,3 +16,17 @@ POST /api/orders
 ```http
 GET /health
 ```
+
+## Source from a pinned commit
+
+The two files below are fetched from the `dotnet/samples` repository at a
+pinned commit by `npm run content:fetch`, so they cannot drift from what the
+text describes.
+
+<SourceFile
+  file="csharp/getting-started/console-webapiclient/Program.cs"
+  lines="1-15"
+  title="Program.cs"
+/>
+
+<SourceFile file="csharp/getting-started/console-webapiclient/Repository.cs" />

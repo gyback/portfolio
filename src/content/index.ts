@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import matter from "gray-matter";
-import type { ComponentType } from "react";
+import type { MDXContent } from "mdx/types";
 import { z } from "zod";
 
 import { exampleMetaSchema, type ExampleMeta, type PageRef } from "./schema";
@@ -19,18 +19,21 @@ export type ExamplePage = {
   slug: string;
   title: string;
   description?: string;
-  Content: ComponentType;
+  Content: MDXContent;
   outline: OutlineEntry[];
   prev: PageRef | null;
   next: PageRef | null;
 };
 
 type MdxModule = {
-  default: ComponentType;
+  default: MDXContent;
   outline?: OutlineEntry[];
 };
 
+// Parsed meta is cached during production builds, where every route reads it.
+// In development the cache is skipped so meta.json edits show up without a restart.
 const cache = new Map<string, Example>();
+const useCache = process.env.NODE_ENV === "production";
 
 function pagePath(slug: string, page: string): string {
   return path.join(CONTENT_DIR, slug, `${page}.mdx`);
@@ -38,7 +41,7 @@ function pagePath(slug: string, page: string): string {
 
 /** Read and validate one example's meta.json. Throws on any problem so the build fails. */
 export function getExample(slug: string): Example {
-  const cached = cache.get(slug);
+  const cached = useCache ? cache.get(slug) : undefined;
   if (cached) return cached;
 
   const metaPath = path.join(CONTENT_DIR, slug, "meta.json");

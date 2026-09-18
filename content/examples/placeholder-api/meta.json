@@ -8,5 +8,13 @@
     { "slug": "index", "title": "Overview" },
     { "slug": "endpoints", "title": "Endpoints" }
   ],
-  "related": ["placeholder"]
+  "related": ["placeholder"],
+  "source": {
+    "repo": "https://github.com/dotnet/samples",
+    "ref": "86ff8487361a6f32549d9c9ab8b14dde55c643cf",
+    "files": [
+      "csharp/getting-started/console-webapiclient/Program.cs",
+      "csharp/getting-started/console-webapiclient/Repository.cs"
+    ]
+  }
 }

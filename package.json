@@ -13,7 +13,10 @@
     "lint:fix": "eslint . --fix",
     "preview": "next build && next start",
     "start": "next start",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "content:fetch": "node scripts/fetch-sources.mjs",
+    "prebuild": "node scripts/fetch-sources.mjs",
+    "predev": "node scripts/fetch-sources.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",

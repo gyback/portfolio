@@ -49,3 +49,27 @@ html {
 .prose figcaption[data-rehype-pretty-code-title] + pre {
   border-radius: 0 0 0.5rem 0.5rem;
 }
+.prose figcaption[data-rehype-pretty-code-title] {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.prose figcaption[data-rehype-pretty-code-title] a {
+  color: inherit;
+  font-weight: normal;
+  text-decoration: none;
+}
+.prose figcaption[data-rehype-pretty-code-title] a:hover {
+  text-decoration: underline;
+}
+
+/* Line numbers. `counter-set` on <code> picks the starting line. */
+.prose code[data-line-numbers] [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: var(--color-gray-500);
+}

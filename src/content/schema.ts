@@ -16,6 +16,26 @@ export const pageRefSchema = z.object({
   title: z.string().min(1),
 });
 
+/**
+ * External source files shown with <SourceFile>. Pinned to a full commit SHA so
+ * snippets never drift from the code they describe. Fetched into
+ * content/.sources by `npm run content:fetch`.
+ */
+export const sourceSchema = z.object({
+  repo: z
+    .string()
+    .regex(
+      /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+$/,
+      "repo must be a GitHub repository URL without a trailing path",
+    ),
+  ref: z
+    .string()
+    .regex(/^[0-9a-f]{40}$/, "ref must be a full 40-character commit SHA"),
+  files: z.array(z.string().min(1)).min(1),
+});
+
+export type ExampleSource = z.infer<typeof sourceSchema>;
+
 export const exampleMetaSchema = z
   .object({
     title: z.string().min(1),
@@ -25,7 +45,7 @@ export const exampleMetaSchema = z
     stack: z.array(z.string().min(1)).min(1),
     pages: z.array(pageRefSchema).min(1),
     related: z.array(z.string().regex(slugPattern)).optional(),
-    repo: z.string().url().optional(),
+    source: sourceSchema.optional(),
     featured: z.boolean().optional(),
   })
   .strict()
