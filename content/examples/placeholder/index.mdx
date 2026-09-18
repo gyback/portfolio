@@ -1,0 +1,42 @@
+---
+description: What this placeholder example is for and how it is structured.
+---
+
+# Placeholder Example
+
+This example exists so the portfolio shell can be built and reviewed before any
+real content is written. It has three pages, each with enough headings to
+exercise the outline on the right.
+
+## Purpose
+
+The shell needs to prove four things:
+
+- The left column lists the pages of this example and marks the active one.
+- The right column lists the headings of the current page and follows scrolling.
+- Previous and next links move through the pages in order.
+- Code blocks and tables render correctly.
+
+### What it is not
+
+It is not a real project and it will be deleted once the first real example lands.
+
+## Structure
+
+| Page         | File               | Contents                      |
+| ------------ | ------------------ | ----------------------------- |
+| Overview     | `index.mdx`        | This page                     |
+| Architecture | `architecture.mdx` | A diagram-free walkthrough    |
+| Results      | `results.mdx`      | Numbers and a closing section |
+
+## A code sample
+
+```ts title="src/content/index.ts"
+export function listExamples() {
+  return readExampleDirectories().map(getExample);
+}
+```
+
+## Closing
+
+Nothing to see here yet. Move on to the next page.
