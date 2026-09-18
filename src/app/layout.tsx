@@ -3,9 +3,15 @@ import "~/styles/globals.css";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
+import { SiteHeader } from "~/components/site/site-header";
+import { site } from "~/site";
+
 export const metadata: Metadata = {
-  title: "Portfolio",
-  description: "Engineering examples across frontend, backend, and infrastructure.",
+  title: {
+    default: site.name,
+    template: `%s · ${site.name}`,
+  },
+  description: site.description,
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -19,7 +25,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body>{children}</body>
+      <body className="min-h-screen bg-white text-gray-900 antialiased">
+        <SiteHeader />
+        {children}
+      </body>
     </html>
   );
 }
