@@ -20,15 +20,19 @@ changelog at the bottom.
   Snippets are pulled at build time from a pinned commit so they never drift.
 - The layout shell is hand-rolled. MDX compilation uses standard remark/rehype
   tooling.
+- Next 16 with Turbopack for dev and build. Linting runs through the ESLint CLI
+  since `next lint` was removed in 16.
+- MDX plugins are listed as strings in `next.config.js` so the config is
+  serialisable for Turbopack. Local plugins use an absolute path.
 
 ## Routes
 
-| Route                       | Purpose                                            |
-| --------------------------- | -------------------------------------------------- |
-| `/`                         | Landing page, short intro, featured examples       |
-| `/examples`                 | Catalog with filters for kind and stack            |
-| `/examples/[slug]`          | Example index page (first page of the example)     |
-| `/examples/[slug]/[page]`   | Individual page within an example                  |
+| Route                     | Purpose                                        |
+| ------------------------- | ---------------------------------------------- |
+| `/`                       | Landing page, short intro, featured examples   |
+| `/examples`               | Catalog with filters for kind and stack        |
+| `/examples/[slug]`        | Example index page (first page of the example) |
+| `/examples/[slug]/[page]` | Individual page within an example              |
 
 ## Content model
 
@@ -41,17 +45,17 @@ content/examples/<slug>/
 
 `meta.json`, validated with zod at build time:
 
-| Field      | Type                                   | Notes                                   |
-| ---------- | -------------------------------------- | --------------------------------------- |
-| `title`    | string                                 |                                         |
-| `summary`  | string                                 | Shown on catalog cards                  |
-| `date`     | ISO date string                        |                                         |
-| `kind`     | frontend, backend, fullstack, infrastructure |                                   |
-| `stack`    | string[]                               | Free-form tags                          |
-| `pages`    | `{ file, title }[]`                    | Ordered. `index.mdx` is always first    |
-| `related`  | string[] (optional)                    | Example slugs                           |
-| `repo`     | URL (optional)                         | External source repository              |
-| `featured` | boolean (optional)                     | Shown on the landing page               |
+| Field      | Type                                         | Notes                                                     |
+| ---------- | -------------------------------------------- | --------------------------------------------------------- |
+| `title`    | string                                       |                                                           |
+| `summary`  | string                                       | Shown on catalog cards                                    |
+| `date`     | ISO date string                              |                                                           |
+| `kind`     | frontend, backend, fullstack, infrastructure |                                                           |
+| `stack`    | string[]                                     | Free-form tags                                            |
+| `pages`    | `{ slug, title }[]`                          | Ordered. First slug must be `index`. File is `<slug>.mdx` |
+| `related`  | string[] (optional)                          | Example slugs                                             |
+| `repo`     | URL (optional)                               | External source repository                                |
+| `featured` | boolean (optional)                           | Shown on the landing page                                 |
 
 ## Phase 1: Strip the scaffold and set the foundation
 
@@ -66,11 +70,11 @@ Leaves the repo as a plain Next 15 + Tailwind 4 app that builds without a databa
 
 ## Phase 2: Content model
 
-- [ ] Create `content/examples/` with one placeholder example of three pages
-- [ ] Define the `meta.json` zod schema in `src/content/schema.ts`
-- [ ] Implement `src/content/` with `listExamples()`, `getExample(slug)`, `getPage(slug, page)`
-- [ ] Write a remark plugin that extracts h2/h3 headings into an outline
-- [ ] Fail the build on invalid `meta.json` or a page listed in meta that does not exist
+- [x] Create `content/examples/` with one placeholder example of three pages
+- [x] Define the `meta.json` zod schema in `src/content/schema.ts`
+- [x] Implement `src/content/` with `listExamples()`, `getExample(slug)`, `getPage(slug, page)`
+- [x] Write a remark plugin that extracts h2/h3 headings into an outline
+- [x] Fail the build on invalid `meta.json` or a page listed in meta that does not exist
 
 ## Phase 3: Routes and the example shell
 
@@ -117,3 +121,5 @@ Record dated notes when a phase completes or a decision changes.
 
 - 2026-09-18: Plan written. Repo is an untouched create-t3-app scaffold.
 - 2026-09-18: Phase 1 complete. Prisma, NextAuth, tRPC, react-query, and env validation removed. MDX tooling added. Build and checks pass with no `.env`.
+- 2026-09-18: Upgraded to Next 16, React 19.3, and `eslint-config-next` 16. Removed `@eslint/eslintrc`.
+- 2026-09-18: Phase 2 complete. Content module, schema, outline plugin, and placeholder example in place. Page refs use `slug` (file is `<slug>.mdx`) instead of `file`. The home page temporarily lists all examples so the build exercises validation until Phase 4 replaces it.

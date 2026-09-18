@@ -1,0 +1,13 @@
+{
+  "title": "Placeholder Example",
+  "summary": "A three-page example used to prove the layout, navigation, and outline before real content exists.",
+  "date": "2026-09-18",
+  "kind": "fullstack",
+  "stack": ["nextjs", "react", "mdx"],
+  "pages": [
+    { "slug": "index", "title": "Overview" },
+    { "slug": "architecture", "title": "Architecture" },
+    { "slug": "results", "title": "Results" }
+  ],
+  "featured": true
+}
