@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-import { getPage } from "~/content";
+import { getPage, getRelatedExamples } from "~/content";
 
 import { Outline } from "./outline";
 import { PrevNext } from "./prev-next";
+import { RelatedExamples } from "./related-examples";
 
 type Props = { slug: string; page: string };
 
@@ -30,6 +31,7 @@ export async function ExamplePageView({ slug, page }: Props) {
   if (!data) notFound();
 
   const { Content, outline, example, prev, next } = data;
+  const related = page === "index" ? getRelatedExamples(example) : [];
 
   return (
     <div className="contents">
@@ -39,6 +41,7 @@ export async function ExamplePageView({ slug, page }: Props) {
         </div>
         <div className="max-w-3xl">
           <PrevNext exampleSlug={example.slug} prev={prev} next={next} />
+          <RelatedExamples examples={related} />
         </div>
       </article>
       <aside className="sticky top-(--header-height) hidden h-[calc(100vh-var(--header-height))] self-start overflow-y-auto py-10 xl:block">

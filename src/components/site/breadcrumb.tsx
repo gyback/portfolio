@@ -43,7 +43,10 @@ export function Breadcrumb({ examples }: { examples: BreadcrumbMap }) {
                   {crumb.label}
                 </span>
               ) : (
-                <Link href={crumb.href} className="truncate hover:text-gray-900">
+                <Link
+                  href={crumb.href}
+                  className="truncate hover:text-gray-900"
+                >
                   {crumb.label}
                 </Link>
               )}

@@ -1,0 +1,12 @@
+{
+  "title": "Placeholder API",
+  "summary": "A second placeholder, backend flavoured, so the catalog filters and related links have something to work with.",
+  "date": "2026-09-10",
+  "kind": "backend",
+  "stack": ["dotnet", "docker"],
+  "pages": [
+    { "slug": "index", "title": "Overview" },
+    { "slug": "endpoints", "title": "Endpoints" }
+  ],
+  "related": ["placeholder"]
+}

@@ -86,6 +86,33 @@ export function listExamples(): Example[] {
     .sort((a, b) => b.date.localeCompare(a.date));
 }
 
+/**
+ * Examples to show alongside one example. Uses the explicit `related` list when
+ * present (throws on an unknown slug so the build fails), otherwise other
+ * examples that share stack tags, most shared first, then newest first.
+ */
+export function getRelatedExamples(example: Example, limit = 2): Example[] {
+  if (example.related && example.related.length > 0) {
+    return example.related.slice(0, limit).map((slug) => {
+      const related = findExample(slug);
+      if (!related) {
+        throw new Error(
+          `Example "${example.slug}": related example "${slug}" does not exist`,
+        );
+      }
+      return related;
+    });
+  }
+
+  const shared = (other: Example) =>
+    other.stack.filter((tag) => example.stack.includes(tag)).length;
+
+  return listExamples()
+    .filter((other) => other.slug !== example.slug && shared(other) > 0)
+    .sort((a, b) => shared(b) - shared(a) || b.date.localeCompare(a.date))
+    .slice(0, limit);
+}
+
 /** Like getExample but returns null for an unknown slug. Validation errors still throw. */
 export function findExample(slug: string): Example | null {
   if (!fs.existsSync(path.join(CONTENT_DIR, slug, "meta.json"))) return null;
