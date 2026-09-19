@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
@@ -7,11 +8,17 @@ import { SiteHeader } from "~/components/site/site-header";
 import { site } from "~/site";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
     default: site.name,
     template: `%s · ${site.name}`,
   },
   description: site.description,
+  openGraph: {
+    siteName: site.name,
+    type: "website",
+    locale: "en_GB",
+  },
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
@@ -25,9 +32,11 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${geist.variable}`}>
-      <body className="min-h-screen bg-white text-gray-900 antialiased">
+      <body className="bg-bg text-fg min-h-screen antialiased">
         <SiteHeader />
         {children}
+        {/* Visit counts. Only sends data when deployed on Vercel. */}
+        <Analytics />
       </body>
     </html>
   );

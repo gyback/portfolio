@@ -19,6 +19,40 @@ npm run check   # lint + typecheck
 npm run build
 ```
 
+## Deploying
+
+The site is hosted on Vercel. `npm run build` produces a fully static export in
+`out/`, which Vercel serves directly with clean URLs.
+
+### Vercel setup
+
+1. Import the repository in Vercel with the Next.js preset. No build settings
+   need changing; `vercel.json` only adds security headers.
+2. Add the custom domain under the project's Domains tab.
+3. Set `NEXT_PUBLIC_SITE_URL` to `https://<your-domain>` for the Production
+   environment so Open Graph URLs use the custom domain. Preview deployments
+   fall back to their own Vercel URL automatically.
+4. Enable Web Analytics under the project's Analytics tab. The `<Analytics />`
+   component in the root layout is already in place and only sends data when
+   running on Vercel.
+
+Node is pinned to 24 via `engines` in `package.json`, which Vercel honours.
+
+### Checks
+
+Vercel's build runs the pinned-source fetch, the typecheck, and the link check,
+because they are part of the build script. The GitHub Actions workflow adds
+lint and format checks and runs the same build on pull requests. Add a branch
+protection rule on `main` that requires the `check` job so a broken pull
+request cannot be merged.
+
+### Other hosts
+
+The export in `out/` is plain HTML and assets and runs on any static host.
+Routes are emitted as `path.html`, so a server such as nginx needs
+`try_files $uri $uri.html $uri/ =404;`. `npm run preview` builds and serves
+`out/` locally.
+
 ## Adding an example
 
 Create `content/examples/<slug>/` with a `meta.json` and one `.mdx` file per

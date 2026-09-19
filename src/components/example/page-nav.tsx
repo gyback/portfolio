@@ -17,7 +17,7 @@ export function PageNav({ example }: { example: PageNavData }) {
 
   return (
     <nav aria-label="Pages in this example">
-      <p className="mb-3 text-xs font-semibold tracking-wide text-gray-500 uppercase">
+      <p className="text-muted mb-3 text-xs font-semibold tracking-wide uppercase">
         {example.title}
       </p>
       <ul className="space-y-1">
@@ -31,8 +31,8 @@ export function PageNav({ example }: { example: PageNavData }) {
                 aria-current={active ? "page" : undefined}
                 className={
                   active
-                    ? "block rounded-md bg-gray-100 px-3 py-1.5 text-sm font-medium text-gray-900"
-                    : "block rounded-md px-3 py-1.5 text-sm text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    ? "bg-subtle text-fg block rounded-md px-3 py-1.5 text-sm font-medium"
+                    : "text-muted hover:bg-subtle hover:text-fg block rounded-md px-3 py-1.5 text-sm"
                 }
               >
                 {page.title}
