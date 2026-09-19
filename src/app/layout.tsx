@@ -1,5 +1,6 @@
 import "~/styles/globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
 import { type Metadata } from "next";
 import { Geist } from "next/font/google";
 
@@ -34,6 +35,8 @@ export default function RootLayout({
       <body className="bg-bg text-fg min-h-screen antialiased">
         <SiteHeader />
         {children}
+        {/* Visit counts. Only sends data when deployed on Vercel. */}
+        <Analytics />
       </body>
     </html>
   );

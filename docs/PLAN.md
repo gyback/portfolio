@@ -12,6 +12,8 @@ changelog at the bottom.
 
 - Content lives in the repo as MDX and is built statically. No database, no auth,
   no runtime API.
+- Hosted on Vercel for availability. The static export is kept so the site can
+  also run on any static host.
 - Left column is per-example navigation only. Examples are reached through the
   global header and a catalog page, not a global tree.
 - Examples are tagged on two axes: `kind` (frontend, backend, fullstack,
@@ -114,7 +116,8 @@ For examples whose code lives in another repo (.NET, deployment configs).
 - [x] Per-page metadata from frontmatter (done in Phase 3)
 - [x] Open Graph image per example
 - [x] Confirm fully static output (`output: "export"`, everything in `out/`)
-- [ ] Deploy to the chosen host and set `NEXT_PUBLIC_SITE_URL` there
+- [x] Vercel-ready: site URL falls back to Vercel's production and preview URLs, Node pinned via `engines`, security headers in `vercel.json`, Web Analytics component in the root layout, CI trimmed to a quality gate
+- [ ] Import the repo in Vercel, add the custom domain, set `NEXT_PUBLIC_SITE_URL` for Production, enable Web Analytics (dashboard steps)
 - [x] CI: lint, typecheck, build
 - [x] Link check across built output so broken internal links fail the build
 
@@ -131,3 +134,4 @@ Record dated notes when a phase completes or a decision changes.
 - 2026-09-18: Phase 4 complete. Catalog with URL-backed kind and stack filters, landing page with featured examples, related examples block on example index pages. Added a second placeholder example (`placeholder-api`) so filters and related links can be exercised. Both placeholders are to be deleted once real examples exist.
 - 2026-09-19: Phase 5 complete. `source` in meta.json declares a GitHub repo, a full commit SHA, and file paths. `scripts/fetch-sources.mjs` downloads them into `content/.sources/<slug>/<ref>/` (committed, pruned on ref change) and runs before `dev` and `build`. `<SourceFile>` renders a cached file with shiki, line numbers, an optional line range, and a link to the file at the pinned commit. Replaced the `repo` meta field with `source`. The content loader no longer caches parsed meta in development, so meta.json edits show without a restart. Placeholder API pins two files from `dotnet/samples` as a working demo.
 - 2026-09-19: Phase 6 complete except the deploy itself. Dark mode via colour tokens (`bg`, `fg`, `muted`, `subtle`, `line`) that follow the system preference. Open Graph image per example generated at build time. Static export enabled; `out/` is excluded from tsconfig so the exported bundles are not type-checked on the next build. `scripts/check-links.mjs` runs after every build and fails it on a broken internal link or fragment (verified). GitHub Actions workflow runs check, format check, and build, and uploads `out/`. `start` script removed since there is no server.
+- 2026-09-19: Chose Vercel for hosting. Added `@vercel/analytics` for visit counts, Vercel URL fallbacks for Open Graph, `engines.node` 24, `vercel.json` security headers, and reduced the GitHub workflow to lint, format, and build checks since Vercel owns the deploy.

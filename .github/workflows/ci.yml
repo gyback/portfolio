@@ -1,3 +1,6 @@
+# Quality gate. Vercel builds and deploys on every push; this workflow adds the
+# lint and format checks Vercel's build does not run, and runs the build so
+# pull requests also get the typecheck and link check before merge.
 name: CI
 
 on:
@@ -6,14 +9,14 @@ on:
   pull_request:
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 24
+          node-version-file: package.json
           cache: npm
 
       - run: npm ci
@@ -24,15 +27,7 @@ jobs:
       - name: Format check
         run: npm run format:check
 
-      # Runs the pinned-source fetch (no-op when cached), the static export,
-      # and the link check over ./out.
+      # Includes the pinned-source fetch (no-op when cached), the static
+      # export, and the link check over ./out.
       - name: Build
         run: npm run build
-        env:
-          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL || 'http://localhost:3000' }}
-
-      - uses: actions/upload-artifact@v4
-        with:
-          name: site
-          path: out
-          retention-days: 7
